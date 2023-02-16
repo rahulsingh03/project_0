@@ -1,0 +1,36 @@
+*{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    font-family: 'Ubuntu', sans-serif;
+}
+body{background-color: rgb(248, 225, 229); }
+
+nav{position: static; height: 60px;width: 60%; margin: auto;}
+
+nav a{
+    display: inline-block;
+    text-decoration: none;
+    color: rgb(117, 117, 117);
+    font-size: 34px;
+    font-weight: bolder;
+    margin-top: 14px;
+}
+
+div{
+    width: 350px;
+    position: absolute;
+    top:50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    background-color: #ffffff;
+    border: 4px solid rgb(255, 189, 200);
+    padding: 20px;
+}
+
+form{display: flex;flex-direction: column;justify-content: space-between;}
+.form p{margin-top:15px;}
+.form-error-msg{color:red;}
+.form input, .form button{border: none; padding: 12px 5px;outline: none; border:2px solid rgb(248, 225, 229); margin-top: 10px;}
+.form button{cursor: pointer; background-color: rgb(245, 215, 220); font-weight: bold;}
+.input-error{border: 2px solid rgb(255, 0, 43);}
