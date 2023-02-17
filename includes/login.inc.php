@@ -10,16 +10,19 @@ if(isset($_POST["submit"])){
 
     if(emptyInputLogin($username, $pwd) !== false){
         echo "<p class='form-error-msg'>Fill in all fields!</p>";
+        echo "<noscript><meta http-equiv='refresh' content='0;url=../login.php?error=emptyinput'></noscript>";
         exit();
     }
 
     if(loginUser($conn, $username, $pwd) !== false){
         echo "<p class='form-error-msg'>Username or Password doesn't match</p>";
-        echo "<noscript><meta http-equiv='refresh' content='0;url=http://localhost/project_0/signup.php?error=incorrectuid'></noscript>";
+        echo "<noscript><meta http-equiv='refresh' content='0;url=../login.php?error=incorrectuid'></noscript>";
         exit();
     }
 }
 else{
-    header("location: ../login.php");
+    echo "<p class='form-error-msg'>There was an error!</p>";
     exit();
 }
+?>
+

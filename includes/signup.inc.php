@@ -14,34 +14,41 @@ if (isset($_POST['submit'])){
     if(emptyInputSignup($name, $email, $username, $pwd, $re_pwd) !== false){
         $emptyInput = true;
         echo "<p class='form-error-msg'>Fill in all fields!</p>";
-        echo "<noscript><meta http-equiv='refresh' content='0;url=http://localhost/project_0/signup.php?error=emptyinput'></noscript>";
+        echo "<noscript><meta http-equiv='refresh' content='0;url=../signup.php?error=emptyinput'></noscript>";
+        exit();
+    }
+
+    if(invalidName($name) !== false){
+        $invalidUid = true;
+        echo "<p class='form-error-msg'>Name should't have numbers!</p>";
+        echo "<noscript><meta http-equiv='refresh' content='0;url=../signup.php?error=invalidName'> </noscript>";
         exit();
     }
 
     if(invalidUid($username) !== false){
         $invalidUid = true;
         echo "<p class='form-error-msg'>Choose a proper username!</p>";
-        echo "<noscript><meta http-equiv='refresh' content='0;url=http://localhost/project_0/signup.php?error=invalidUid'> </noscript>";
+        echo "<noscript><meta http-equiv='refresh' content='0;url=../signup.php?error=invalidUid'> </noscript>";
         exit();
     }
 
     if(invalidEmail($email) !== false){
         $invalidEmail = true;
         echo "<p class='form-error-msg'>Incorrect Email!</p>";
-        echo "<noscript><meta http-equiv='refresh' content='0;url=http://localhost/project_0/signup.php?error=invalidEmail'> </noscript>";
+        echo "<noscript><meta http-equiv='refresh' content='0;url=../signup.php?error=invalidEmail'> </noscript>";
         exit();
     }
 
     if(pwdMatch($pwd,$re_pwd) !== false){
         $pwdMatch = true;
         echo "<p class='form-error-msg'>Password doesn't match!</p>";
-        echo "<noscript><meta http-equiv='refresh' content='0;url=http://localhost/project_0/signup.php?error=checkpwd'> </noscript>";
+        echo "<noscript><meta http-equiv='refresh' content='0;url=../signup.php?error=checkpwd'> </noscript>";
         exit();
     }
 
     if(UidExists($conn, $username, $email) !== false){
         echo "<p class='form-error-msg'>Username/Email already taken!</p>";
-        echo "<noscript><meta http-equiv='refresh' content='0;url=http://localhost/project_0/signup.php?error=usernametaken'> </noscript>";
+        echo "<noscript><meta http-equiv='refresh' content='0;url=../signup.php?error=usernametaken'> </noscript>";
         exit();
     }
 

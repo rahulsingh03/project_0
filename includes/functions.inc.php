@@ -9,8 +9,17 @@ function emptyInputSignup($name, $email, $username, $pwd, $re_pwd){
     }
 }
 
+function invalidName($name){
+    if (!preg_match("/^[a-zA-Z-' ]*$/",$name)) {
+        return true;
+    }
+    else{
+        return false;
+    }
+}
+
 function invalidUid($username){
-    if(!preg_match("/^[a-zA-z0-9]*$/", $username)){
+    if(!preg_match("/^[a-zA-Z0-9-' ]*$/", $username) || preg_match("/^[0-9-' ]*$/", $username)){
         return true;
     }
     else{
@@ -72,7 +81,7 @@ function createUser($conn, $name, $email, $username, $pwd){
     mysqli_stmt_bind_param($stmt, "ssss", $name, $email, $username, $hasedpwd);
     mysqli_stmt_execute($stmt);
     mysqli_stmt_close($stmt);
-    echo '<script type="text/javascript">window.location = "login.php"</script>';
+    echo json_encode(array('url' => 'login.php'));
     exit();
 }
 
@@ -104,7 +113,9 @@ function loginUser($conn, $username, $pwd){
         session_start();
         $_SESSION["userid"] = $UidExists["userId"];
         $_SESSION["useruid"] = $UidExists["userUid"];
-        echo '<script type="text/javascript">window.location = "index.php"</script>';
+        echo json_encode(array('url' => 'index.php'));
+        // echo '<script type="text/javascript">window.location = "index.php"</script>';
+        echo "<noscript><meta http-equiv='refresh' content='0;url=../index.php'> </noscript>";
         exit();
     }
 }

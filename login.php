@@ -13,10 +13,21 @@
                     uid: uid,
                     pwd: pwd,
                     submit: submit
-                });
-                
+                },function(){
+                    var obj = document.getElementsByClassName("form-msg")[0].innerText;
+                    try {
+                        if(JSON.parse(obj)){
+                        obj = JSON.parse(obj);
+                        window.location = obj.url;
+
+                    }
+                    } catch (error) {
+                        //pass
+                    }
+                });      
             });
         });
+   
 </script>
 
     <div class="form">
@@ -24,13 +35,10 @@
         <?php
         if(isset($_GET["error"])){
             if($_GET["error"] == "emptyinput"){
-                echo "<p>Fill in all fields!</p>";
+                echo "<p class='form-error-msg'>Fill in all fields!</p>";
             }
             else if($_GET["error"] == "incorrectuid"){
-                echo "<p>Username or Password doesn't match</p>";
-            }
-            else if($_GET["error"] == "incorrectpwd"){
-                echo "<p>Password doesn't match!</p>";
+                echo "<p class='form-error-msg'>Username or Password doesn't match</p>";
             }
         }
         ?>

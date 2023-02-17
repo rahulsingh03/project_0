@@ -11,13 +11,24 @@
                 var pwd = $("#pwd").val();
                 var re_pwd = $("#re_pwd").val();
                 var submit = $("#submit").val();
-                $(".form-msg").load("includes/signup.inc.php", {
+                $(".form-msg").load("includes/signup.inc.php",{
                     name: name,
                     email: email,
                     uid: uid,
                     pwd: pwd,
                     re_pwd: re_pwd,
                     submit: submit
+                },function(){
+                    var obj = document.getElementsByClassName("form-msg")[0].innerText;
+                    try {
+                        if(JSON.parse(obj)){
+                        obj = JSON.parse(obj);
+                        window.location = obj.url;
+                    }
+                    } catch (error) {
+                        //pass
+                    }
+                    
                 });
             });
         });
@@ -40,7 +51,7 @@
                 echo "<p class='form-error-msg'>Password doesn't match!</p>";
             }
             else if($_GET["error"] == "usernametaken"){
-                echo "<p class='form-error-msg'>Username already taken!</p>";
+                echo "<p class='form-error-msg'>Username/Email already taken!</p>";
             }
             else if($_GET["error"] == "stmtfailed"){
                 echo "<p class='form-error-msg'>Something went wrong! Try again.</p>";
